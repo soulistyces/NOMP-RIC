@@ -1,0 +1,58 @@
+<h1>Statistics</h1>
+<h2>Pools</h2>
+<table style="width: 100%; text-align: left;">
+	<thead>
+		<tr>
+			<th>Pool</th>
+			<th>Algo</th>
+			<th>Workers</th>
+			<th>Valid Shares</th>
+			<th>Invalid Shares</th>
+			<th>Total Blocks</th>
+			<th>Pending</th>
+			<th>Confirmed</th>
+			<th>Orphaned</th>
+			<th>Shares/s</th>
+		</tr>
+	</thead>
+	{{ for(var pool in it.stats.pools) { }}
+	<tr>
+		<td>{{=it.stats.pools[pool].name}}</td>
+		<td>{{=it.stats.pools[pool].algorithm}}</td>
+		<td>{{=Object.keys(it.stats.pools[pool].workers).length}}</td>
+		<td>{{=it.stats.pools[pool].poolStats.validShares}}</td>
+		<td>{{=it.stats.pools[pool].poolStats.invalidShares}}</td>
+		<td>{{=it.stats.pools[pool].poolStats.validBlocks}}</td>
+		<td>{{=it.stats.pools[pool].blocks.pending}}</td>
+		<td>{{=it.stats.pools[pool].blocks.confirmed}}</td>
+		<td>{{=it.stats.pools[pool].blocks.orphaned}}</td>
+		<td>{{=it.stats.pools[pool].hashrateString}}</td>
+	</tr>
+	{{ } }}
+</table>
+
+<h2>Workers</h2>
+{{ for(var pool in it.stats.pools) { }}
+<h3>{{=it.stats.pools[pool].name}}</h3>
+<table style="width: 100%; text-align: left;">
+	<thead>
+		<tr>
+			<th>Address</th>
+			<th>Shares</th>
+			<th>Invalid shares</th>
+			<th>Efficiency</th>
+			<th>Shares/s</th>
+		</tr>
+	</thead>
+	{{ for(var worker in it.stats.pools[pool].workers) { }}
+	{{var workerstat = it.stats.pools[pool].workers[worker];}}
+	<tr>
+		<td>{{=worker}}</td>
+		<td>{{=Math.floor(workerstat.shares)}}</td>
+		<td>{{=Math.floor(workerstat.invalidshares)}}</td>
+		<td>{{? workerstat.shares > 0}} {{=Math.floor(10000*workerstat.shares/(workerstat.shares + workerstat.invalidshares))/100}}% {{??}} 0% {{?}}</td>
+		<td>{{=workerstat.hashrateString}}</td>
+	</tr>
+	{{ } }}
+</table>
+{{ } }}
