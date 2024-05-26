@@ -1,0 +1,50 @@
+{
+	"name": "NOMP-RIC",
+	"version": "21.07",
+	"description": "An extremely efficient, highly scalable, all-in-one, easy to setup Riecoin mining pool",
+	"keywords": [
+		"stratum",
+		"mining",
+		"pool",
+		"server",
+		"poolserver",
+		"Riecoin"
+	],
+	"homepage": "https://forum.riecoin.dev/viewtopic.php?f=6&t=4",
+	"bugs": {
+		"url": "https://forum.riecoin.dev/viewtopic.php?f=6&t=4"
+	},
+	"license": "GPL-2.0",
+	"author": "Matthew Little",
+	"contributors": [
+		"vekexasia",
+		"TheSeven",
+		"Pttn"
+	],
+	"main": "init.js",
+	"bin": {
+		"block-notify": "./scripts/blockNotify.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/soulistyces/NOMP-RIC.git"
+	},
+	"dependencies": {
+		"stratum-pool": "file:deps/stratum-pool",
+		"dateformat": "*",
+		"node-json-minify": "*",
+		"redis": "*",
+		"mysql": "*",
+		"async": "*",
+		"express": "*",
+		"body-parser": "*",
+		"compression": "*",
+		"dot": "*",
+		"colors": "*",
+		"node-watch": "*",
+		"extend": "*"
+	},
+	"engines": {
+		"node": ">=10.21.0"
+	}
+}
